@@ -1,0 +1,14 @@
+.jumbotron {
+    background-image: url(../../sunset-1.jpg);
+    background-size: cover;
+    background-repeat: no-repeat;
+    height: 650px;
+    color: white;
+    border-bottom: rgb(247, 244, 244) solid 2px
+}
+
+#title {
+    margin-top: 145px;
+}
+
+
