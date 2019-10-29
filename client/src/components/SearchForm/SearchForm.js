@@ -5,7 +5,7 @@ export function Input(props) {
     return (
         <div className="form-group">
             <h1 id='statement'>Submit a Comment</h1>
-            <input id='title' onChange={props.onChange} className="form-control" placeholder='Enter Title' value={props.title} />
+            <input id='title' name="title" onChange={props.handleChange} className="form-control" placeholder='Enter Title' value={props.title} />
         </div>
     );
 }
@@ -13,7 +13,13 @@ export function Input(props) {
 export function TextArea(props) {
     return (
         <div className="form-group">
-            <textarea id='message' onChange={props.onChange} className="form-control" placeholder='Enter Message' value={props.message} />
+            <textarea id='message'
+                name="message" 
+                onChange={props.handleChange}
+                className="form-control"
+                placeholder='Enter Message'
+                value={props.message}
+            />
         </div>
     );
 }

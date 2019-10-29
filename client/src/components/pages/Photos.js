@@ -16,7 +16,7 @@ class Photos extends Component {
         this.loadComments()
     }
 
-    onChange = event => {
+    handleChange = event => {
         const { name, value } = event.target
         this.setState({
             [name]: value
@@ -26,38 +26,39 @@ class Photos extends Component {
     loadComments = () => {
         API.getComments()
     .then(res =>
-        this.setState({ comments: res.data, title: '', message: '' })
+        this.setState({ comments: res.data })
       )
       .catch(err => console.log(err));
     }
 
     handleFormSubmit = event => {
+        const { title, message } = this.state;
         event.preventDefault()
-        console.log('hello')
-        API.saveComment({
-            title: this.state.title,
-            message: this.state.message
-        })
+        console.log('hello');
+        const data = {
+            title,
+            message
+        }
+        API.saveComment(data)
         .then(res => {
-            console.log(res)
+            console.log('the res', res)
+            this.loadComments();
         })
     }
 
     render() {
+        console.log(this.state)
         return (
             <React.Fragment>
                 <NavBar/>
                 <form>
-                    <p>title: {this.state.title}</p>
                     <Input
                         value={this.state.title}
-                        name="title"
-                        onChange={this.onChange}
+                        handleChange={this.handleChange}
                     />
                     <TextArea
                         value={this.state.message}
-                        name='message'
-                        onChange={this.onChange}
+                        handleChange={this.handleChange}
                     />
                     <FormBtn
                         handleSubmit={this.handleFormSubmit}
