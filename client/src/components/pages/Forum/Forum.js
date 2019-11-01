@@ -170,7 +170,7 @@ class Forum extends Component {
                                         null
                                     }
                                     {this.state.showComponent ?
-                                        <div style={{ marginTop: 30 }}className='topic-comment'>
+                                        <div style={{ marginTop: 30 }} className='topic-comment'>
                                             <CommentTextArea
                                                 handleChange={this.handleChange}
                                                 value={this.state.text}
