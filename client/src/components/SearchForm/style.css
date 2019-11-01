@@ -1,22 +1,32 @@
-#title {
-    width: 30%;
-    margin-left: 550px;
-}
-
-#message {
-    width: 30%;
-    height: 200px;
-    font-size: 17px;
-    margin-left: 550px;
-}
-
 #submit {
-    width: 30%;
-    margin-left: 550px;
-    margin-bottom: 600px;
+    width: 100%;
+    position: relative;
+    bottom: 100px;
 }
 
 #statement {
-    margin-left: 630px;
-    font-size: 30px;
+    margin-top: 40px;
+    color: white;
 }
+
+#message {
+    height: 200px;
+    position: relative;
+    bottom: 100px;
+    background: rgb(248, 247, 247, 0.7);
+    border: black groove 2px;
+}
+
+#title {
+    position: relative;
+    bottom: 100px;
+    background: rgb(248, 247, 247, 0.7);
+    border: black groove 2px;
+}
+
+
+
+
+
+
+

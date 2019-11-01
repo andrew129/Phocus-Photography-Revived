@@ -1,0 +1,20 @@
+body {
+    background-image: url('../../../sunset-1.jpg');
+    background-size: cover;
+}
+
+.comment-section {
+    background: rgb(248, 247, 247, 0.7);
+    width: 100%;
+    text-align: center;
+    padding-bottom: 10px;
+    border-radius: 10px;
+    border: black groove 2px;
+    padding-left: 10px;
+    padding-right: 10px;
+    position: relative;
+    bottom: 40px;
+    padding-top: 10px;
+}
+
+
