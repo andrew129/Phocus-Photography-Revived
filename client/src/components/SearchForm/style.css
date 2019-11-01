@@ -14,12 +14,14 @@
     position: relative;
     bottom: 100px;
     background: rgb(248, 247, 247, 0.7);
+    border: black groove 2px;
 }
 
 #title {
     position: relative;
     bottom: 100px;
     background: rgb(248, 247, 247, 0.7);
+    border: black groove 2px;
 }
 
 
