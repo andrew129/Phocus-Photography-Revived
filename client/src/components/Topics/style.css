@@ -1,0 +1,10 @@
+#titles {
+    border-bottom: rgb(24, 12, 2) solid 2px;
+    padding-bottom: 3px;
+    font-size: 30px;
+}
+
+#messages {
+    border-bottom: rgb(24, 12, 2) solid 2px;
+    padding-bottom: 7px;
+}

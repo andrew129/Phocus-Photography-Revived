@@ -5,6 +5,7 @@ const app = express();
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose')
 const cors = require('cors');
+const topics = require('./routes/topicRoutes');
 const comments = require('./routes/commentRoutes');
 
 app.use(cors());
@@ -20,7 +21,8 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/people", { useN
 
 // Send every request to the React app
 // Define any API routes before this runs
-app.use('/api/comments', comments);
+app.use('/api/topics', topics);
+app.use('/api/comments', comments)
 app.get("*", function(req, res) {
   res.sendFile(path.join(__dirname, "./client/build/index.html"));
 });

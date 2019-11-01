@@ -3,8 +3,8 @@ import './style.css'
 
 export function Input(props) {
     return (
-        <div className="form-group">
-            <h1 id='statement'>Submit a Comment</h1>
+        <div className="form-group input text-center">
+            <h1 id='statement'>Start a Discussion</h1>
             <input id='title' name="title" onChange={props.handleChange} className="form-control" placeholder='Enter Title' value={props.title} />
         </div>
     );
