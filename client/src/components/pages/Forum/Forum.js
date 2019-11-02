@@ -18,6 +18,7 @@ class Forum extends Component {
         title: '',
         message: '',
         text: '',
+        id: '',
         topics: [],
         comments: [],
         showComponent: false,
@@ -76,6 +77,7 @@ class Forum extends Component {
         .then(res => {
             console.log(res.data._id)
             this.setState({
+                id: res.data._id,
                 showComponent: true
             })
         })
@@ -196,3 +198,8 @@ class Forum extends Component {
 }
 
 export default Forum;
+//**IMPORTANT**//
+//**map is running show component for every item in the array need to fix**//
+//POSSIBLE FIX: DO THE MAP METHOD INSIDE OF A SEPERATE FUNCTION AND GRAB THE CURRENT ID//
+//implement rotating slideshow of pictures in background to fit the theme//
+//**---------------------------------------------------------------------- **//
