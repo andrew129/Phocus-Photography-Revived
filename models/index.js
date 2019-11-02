@@ -1,4 +1,5 @@
 module.exports = {
     Topic: require("./Topic"),
-    Comment: require('./Comment')
+    Comment: require('./Comment'),
+    Image: require('./Image')
 };
