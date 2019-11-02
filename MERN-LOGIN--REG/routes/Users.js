@@ -30,7 +30,7 @@ users.post('/register', (req, res) => {
                     res.json({ status: user.email + 'registered!' })
                 })
                 .catch(err => {
-                    res.send('error ' + err)
+                    res.send('error: ' + err)
                 })
             })
         } else { 
