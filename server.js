@@ -35,7 +35,7 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/people", { useN
 // Define any API routes before this runs
 app.use('/api/topics', topics);
 app.use('/api/comments', comments)
-app.use('/image', images);
+app.use('/api/uploads', images);
 
 app.get("*", function(req, res) {
   res.sendFile(path.join(__dirname, "./client/build/index.html"));

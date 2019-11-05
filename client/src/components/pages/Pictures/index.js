@@ -9,7 +9,9 @@ import Wrapper from '../../Wrapper/';
 class Pictures extends Component {
     state = {
         multerImage: DefaultImg,
-        images: []
+        images: [],
+        likes: 0,
+        dislikes: 0
     }
 
     componentDidMount() {
@@ -27,7 +29,7 @@ class Pictures extends Component {
             multerImage: URL.createObjectURL(event.target.files[0])
         })
 
-        axios.post('/image/uploadmulter', imageFormObj)
+        axios.post('/api/uploads', imageFormObj)
             .then((data) => {
                 console.log(data)
                 if (data.data.success) {
@@ -41,17 +43,17 @@ class Pictures extends Component {
     }
 
     getImages = () => {
-        axios.get('/image/uploadmulter')
+        axios.get('/api/uploads')
             .then(res => {
                 console.log(res)
                 this.setState({
-                    images: res.data 
+                    images: res.data,
                 })
             })
     }
 
     deleteImage = id => {
-        axios.delete('/image/uploadmulter/' + id)
+        axios.delete('/api/uploads/' + id)
             .then(res => {
                 this.getImages()
                 console.log(res)
@@ -63,6 +65,42 @@ class Pictures extends Component {
         this.getImages()
         this.setState({
             multerImage: DefaultImg
+        })
+    }
+
+    updateLikes = id => {
+        axios.get('/api/uploads/' + id)
+            .then(res => {
+                console.log(res)
+                const data = {
+                    likes: res.data.likes + 1,
+                    dislikes: res.data.dislikes
+                }
+                this.setState(data)
+                axios.put('/api/uploads/' + id, data)
+                    .then(res => {
+                        console.log(res)
+                        this.getImages()
+                    })
+                    .catch(err => console.log(err))
+            })
+    }
+
+    updateDislikes = id => {
+        axios.get('/api/uploads/' + id)
+        .then(res => {
+            console.log(res)
+            const data = {
+                likes: res.data.likes,
+                dislikes: res.data.dislikes + 1
+            }
+            this.setState(data)
+            axios.put('/api/uploads/' + id, data)
+                .then(res => {
+                    console.log(res)
+                    this.getImages()
+                })
+                .catch(err => console.log(err))
         })
     }
 
@@ -79,7 +117,7 @@ class Pictures extends Component {
                                 handleChange={this.uploadImage}
                                 image={this.state.multerImage}
                             />
-                            <button style={{marginLeft: 180, marginTop: 20}} type="button" onClick={this.putOnPage} className="btn btn-success">Click here to Upload</button>
+                            <button style={{marginLeft: 180, position: 'relative', bottom: 69, left: 5}} type="button" onClick={this.putOnPage} className="btn btn-success">Click here to Upload</button>
                         </div>
                         <div className='col-3'>
                         </div>
@@ -95,6 +133,15 @@ class Pictures extends Component {
                                             id={image._id}
                                             photo={image.imageData}
                                         />
+                                        
+                                        <button onClick={() => this.updateLikes(image._id)} className='like'>
+                                            <span class="like"><i class="glyphicon glyphicon-thumbs-up"></i></span>
+                                            <span className='count'>{image.likes}</span>
+                                        </button>
+                                        <button onClick={() => this.updateDislikes(image._id)} className='dislike'>
+                                           
+                                            <span className='counttwo'>{image.dislikes}</span>
+                                        </button>
                                         <button type="button" onClick={() => this.deleteImage(image._id)} className="btn btn-danger">Delete Image</button>
                                     </div>
                                 ))}
