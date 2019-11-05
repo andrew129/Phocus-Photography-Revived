@@ -1,0 +1,15 @@
+#buttonone {
+    opacity: 0.5;
+}
+
+#buttonone:hover {
+    opacity: 1;
+}
+
+#buttontwo {
+    opacity: 0.5;
+}
+
+#buttontwo:hover {
+    opacity: 1;
+}
