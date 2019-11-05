@@ -5,6 +5,7 @@ import UploadForm from '../../UploadForm';
 import DefaultImg from '../../../default.jpg';
 import ImgSection from '../../ImageSection';
 import Wrapper from '../../Wrapper/';
+import './style.css'
 
 class Pictures extends Component {
     state = {
@@ -134,12 +135,12 @@ class Pictures extends Component {
                                             photo={image.imageData}
                                         />
                                         
-                                        <button onClick={() => this.updateLikes(image._id)} className='like'>
-                                            <span class="like"><i class="glyphicon glyphicon-thumbs-up"></i></span>
+                                        <button id='buttonone' style={{position: 'relative', bottom: 41, left: 8}} onClick={() => this.updateLikes(image._id)} className='like'>
+                                            <span class="like"><i className="fa fa-thumbs-up"></i></span>
                                             <span className='count'>{image.likes}</span>
                                         </button>
-                                        <button onClick={() => this.updateDislikes(image._id)} className='dislike'>
-                                           
+                                        <button id='buttontwo' style={{position: 'relative', bottom: 41, left: 220}} onClick={() => this.updateDislikes(image._id)} className='dislike'>
+                                            <span class="like"><i className="fa fa-thumbs-down"></i></span>
                                             <span className='counttwo'>{image.dislikes}</span>
                                         </button>
                                         <button type="button" onClick={() => this.deleteImage(image._id)} className="btn btn-danger">Delete Image</button>
