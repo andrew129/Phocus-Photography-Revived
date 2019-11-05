@@ -10,9 +10,17 @@ const ImageSchema = new Schema({
     imageData: {
         type: String,
         required: true
+    },
+    likes: {
+        type: Number,
+    },
+    dislikes: {
+        type: Number,
     }
 });
 
 const Image = mongoose.model('Image', ImageSchema);
 
 module.exports = Image;
+
+//this.setstate likes +1 with each click post to server 

@@ -77,8 +77,7 @@ class Forum extends Component {
         .then(res => {
             console.log(res.data._id)
             this.setState({
-                id: res.data._id,
-                showComponent: true
+                showComponent: true,
             })
         })
         .catch(err => console.log(err))
@@ -118,7 +117,7 @@ class Forum extends Component {
 
     render() {
         return (
-            <div>
+            <div className='content'>
                 <NavBar/>
                 <div className='container'>
                     <div className="row">
@@ -142,10 +141,10 @@ class Forum extends Component {
                             {this.state.topics.map(topic => (
                                 <div className="comment-section">
                                     <Topics
-                                    id={topic._id}
-                                    key={topic._id}
-                                    title={topic.title}
-                                    message={topic.message}
+                                        id={topic._id}
+                                        key={topic._id}
+                                        title={topic.title}
+                                        message={topic.message}
                                     />
                                     <DeleteBtn
                                         deleteTopic={() => this.deleteTopic(topic._id)}
@@ -161,13 +160,13 @@ class Forum extends Component {
                                     />
                                     {this.state.showComments ?
                                         <div className='comment-display'>
-                                         {this.state.comments.map(comment => (
-                                            <CommentDisplay
-                                                id={topic._id}
-                                                key={topic._id}
-                                                statement={comment.text}
-                                            />
-                                        ))}
+                                            {this.state.comments.map(comment => (
+                                                <CommentDisplay
+                                                    id={topic._id}
+                                                    key={topic._id}
+                                                    statement={comment.text}
+                                                />
+                                            ))}
                                         </div> :
                                         null
                                     }
@@ -187,12 +186,12 @@ class Forum extends Component {
                                     }
                                 </div>
                             ))}
-                        </div>
                         <div className='col-3'>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
         )
     }
 }

@@ -29,7 +29,7 @@ const upload = multer({
     fileFilter: fileFilter
 });
 
-router.route('/uploadmulter')
+router.route('/')
     .post(upload.single('imageData'), (req, res, next) => {
         console.log(req.body)
         const newImage = new Image({
@@ -48,7 +48,7 @@ router.route('/uploadmulter')
             .catch((err) => next(err))
     })
 
-    router.get('/uploadmulter', (req, res) => {
+    router.get('/', (req, res) => {
         Image.find({})
             .then((dbImage) => {
                 console.log(dbImage)
@@ -60,13 +60,40 @@ router.route('/uploadmulter')
             })
     })
 
-    router.delete('/uploadmulter/:id', function(req, res) {
+    router.get('/:id', function(req, res) {
+        Image.findOne(
+            {
+                _id: req.params.id
+            }
+        )
+        .then(function(dbImage) {
+            console.log(dbImage)
+            res.send(dbImage)
+        })
+        .catch(function(err) {
+            res.send(err)
+        });
+    })
+
+    router.delete('/:id', function(req, res) {
         Image.findByIdAndRemove(req.params.id)
         .then(dbImage => {
             console.log('success')
             res.json(dbImage)
         })
         .catch(err => console.log(err));
-    })        
+    })
+    
+    router.put('/:id', function(req, res) {
+        Image.findOneAndUpdate({ _id: req.params.id }, { $set: { likes: req.body.likes, dislikes: req.body.dislikes }}, { new: true })
+        .then(dbImage => {
+            res.send(dbImage)
+            console.log(dbImage)
+        })
+        .catch(err => {
+            console.log(err)
+        })
+       
+    })
 
 module.exports = router;
