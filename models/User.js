@@ -20,7 +20,12 @@ const UserSchema = new Schema({
     date: {
         type: Date,
         default: Date.now
-    }
+    },
+    comments: [{
+        type: Schema.Types.ObjectId,
+        ref: 'Comment'
+    }]
+
 })
 
-module.exports = USer = mongoose.model('users', UserSchema);
+module.exports = User = mongoose.model('User', UserSchema);
