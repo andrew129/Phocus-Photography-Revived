@@ -68,6 +68,10 @@ class Forum extends Component {
         API.saveTopic(data)
         .then(res => {
             console.log('the res', res)
+            this.setState({
+                title: '',
+                message: ''
+            })
             this.loadTopics();
         })
     }
