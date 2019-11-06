@@ -30,7 +30,7 @@ class Pictures extends Component {
             multerImage: URL.createObjectURL(event.target.files[0])
         })
 
-        axios.post('/api/uploads', imageFormObj)
+        axios.post('/api/uploads/', imageFormObj)
             .then((data) => {
                 console.log(data)
                 if (data.data.success) {
@@ -44,7 +44,7 @@ class Pictures extends Component {
     }
 
     getImages = () => {
-        axios.get('/api/uploads')
+        axios.get('/api/uploads/')
             .then(res => {
                 console.log(res)
                 this.setState({
