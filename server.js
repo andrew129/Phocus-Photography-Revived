@@ -9,15 +9,15 @@ const cors = require('cors');
 const topics = require('./routes/topicRoutes');
 const comments = require('./routes/commentRoutes');
 const images = require('./routes/imageRoutes');
-const passport = require("passport");
-const LocalStrategy = require('passport-local').Strategy;
+// const passport = require("passport");
+// const LocalStrategy = require('passport-local').Strategy;
 
 app.use(cors());
 app.use('/uploads', express.static('uploads'));
 app.use(bodyParser.json({limit: '50mb'}));
 app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 app.use(cookieParser());
-app.use(passport.initialize());
+// app.use(passport.initialize());
 
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
@@ -39,8 +39,8 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/people", { useN
 app.use('/api/topics', topics);
 app.use('/api/comments', comments)
 app.use('/api/uploads', images);
-const registrationRoutes = require("./routes")(passport);
-app.use(registrationRoutes);
+// const registrationRoutes = require("./routes")(passport);
+// app.use(registrationRoutes);
 
 app.get("*", function(req, res) {
   res.sendFile(path.join(__dirname, "./client/build/index.html"));

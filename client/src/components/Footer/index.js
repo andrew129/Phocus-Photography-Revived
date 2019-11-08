@@ -1,7 +1,7 @@
 import React from 'react';
 import './style.css';
 
-function Footer(props) {
+function Footer() {
   return (
     <div className='footer'>
       <p id='copyright'>© 2019 Phocus-Photography </p>
