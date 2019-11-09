@@ -30,9 +30,10 @@ app.use((req, res, next) => {
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
 }
+
 //connecting to mongoose
 mongoose.promise = Promise
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost/people", { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost:27017/people", { useNewUrlParser: true, useUnifiedTopology: true });
 
 // Send every request to the React app
 // Define any API routes before this runs
