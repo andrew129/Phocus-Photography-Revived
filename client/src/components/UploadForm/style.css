@@ -1,0 +1,9 @@
+.image-container text-center{
+    display: flex;
+
+}
+
+.process{
+    display: flex;
+    flex-wrap: wrap;
+}
