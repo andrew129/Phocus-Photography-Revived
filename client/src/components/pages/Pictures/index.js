@@ -12,7 +12,8 @@ class Pictures extends Component {
         multerImage: DefaultImg,
         images: [],
         likes: 0,
-        dislikes: 0
+        dislikes: 0,
+        showEnlarged: false
     }
 
     componentDidMount() {
@@ -133,18 +134,39 @@ class Pictures extends Component {
                                             key={image._id}
                                             id={image._id}
                                             photo={image.imageData}
+                                            showEnlarged={() => this.showEnlarged(image._id)}
                                         />
-                                        
                                         <button id='buttonone' style={{position: 'relative', bottom: 41, left: 8}} onClick={() => this.updateLikes(image._id)} className='like'>
-                                            <span class="like"><i className="fa fa-thumbs-up"></i></span>
+                                            <span style={{color: 'blue'}} className="like"><i className="fa fa-thumbs-up"></i></span>
                                             <span className='count'>{image.likes}</span>
                                         </button>
                                         <button id='buttontwo' style={{position: 'relative', bottom: 41, left: 220}} onClick={() => this.updateDislikes(image._id)} className='dislike'>
-                                            <span class="like"><i className="fa fa-thumbs-down"></i></span>
+                                            <span style={{color: 'red'}} className="like"><i className="fa fa-thumbs-down"></i></span>
                                             <span className='counttwo'>{image.dislikes}</span>
                                         </button>
                                         <button type="button" onClick={() => this.deleteImage(image._id)} className="btn btn-danger">Delete Image</button>
                                     </div>
+                                    // {this.state.showEnlarged ?
+                                    //     <div className="modal" tabindex="-1" role="dialog">
+                                    //         <div className="modal-dialog" role="document">
+                                    //             <div className="modal-content">
+                                    //                 <div className="modal-header">
+                                    //                     <h5 className="modal-title">Modal title</h5>
+                                    //                     <button type="button" className="close" data-dismiss="modal" aria-label="Close">
+                                    //                         <span aria-hidden="true">&times;</span>
+                                    //                     </button>
+                                    //                 </div>
+                                    //                 <div className="modal-body">
+                                    //                     <p>Modal body text goes here.</p>
+                                    //                 </div>
+                                    //                 <div className="modal-footer">
+                                    //                     <button type="button" className="btn btn-secondary" data-dismiss="modal">Close</button>
+                                    //                 </div>
+                                    //             </div>
+                                    //         </div>
+                                    //     </div> : 
+                                    //     null
+                                    // }
                                 ))}
                             </Wrapper>
                         </div>
