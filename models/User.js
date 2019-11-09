@@ -15,7 +15,8 @@ const UserSchema = new Schema({
     },
     email: {
         type: String,
-        required: true 
+        required: true,
+        index: { unique: true } 
     },
     password: {
         type: String,
@@ -28,8 +29,20 @@ const UserSchema = new Schema({
     comments: [{
         type: Schema.Types.ObjectId,
         ref: 'Comment'
-    }]
+    }],
+    loginAttemps: {
+        type: Number, 
+        required: true, 
+        default: 0}, 
+        lockUntil: { type: Number },
+    lockUntil: { type: Number }
 }); 
+
+UserSchema.statics.failedLogin = {
+    NOT_FOUND: 0,
+    PASSWORD_INCORRECT: 1,
+    MAX_ATTEMPTS: 2
+};
 
 UserSchema.pre(save, function(next) {
     var user = this;
