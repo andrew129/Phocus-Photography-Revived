@@ -1,95 +1,74 @@
-const mongoose = require('mongoose'); 
-const Schema = mongoose.Schema;
-const bcrypt = require(bcrypt),
-const SALT = 10;
+const mongoose = require('mongoose');
+// const Schema = require('mongoose.Schema');
+const bcrypt = require('bcrypt');
 
-const UserSchema = new Schema({
-
-    first_name: {
-        type: String,
-        required: true
-    },
-    last_name: {
-        type: String,
-        required: true
-    },
-    email: {
-        type: String,
-        required: true,
-        index: { unique: true } 
-    },
-    password: {
-        type: String,
-        required: true
-    },
-    date: {
-        type: Date,
-        default: Date.now
-    },
-    comments: [{
-        type: Schema.Types.ObjectId,
-        ref: 'Comment'
-    }]
-}); 
-
-
-UserSchema.pre('save', function(next) {
-    let user = this;
-
-// only hash the password if it has been modified (or is new)
-if (!user.isModified('password')) return next();
-
-    // generate a salt
-    bcrypt.genSalt(SALT, function(err, salt) {
-        if (err) return next(err);
-
-        // hash the password using our new salt
-        bcrypt.hash(user.password, salt, function(err, hash) {
-            if (err) return next(err);
-
-            // override the cleartext password with the hashed one
-            user.password = hash;
-            next();
-        });
-    });
+// define the User model schema
+const UserSchema = new mongoose.Schema({
+  first_name: {
+    type: String,
+    required: true
+  },
+  last_name: {
+    type: String,
+    required: true
+  },
+  email: {
+    type: String,
+    required: true,
+    index: { unique: true }
+  },
+  password: {
+    type: String,
+    required: true
+  },
+  date: {
+    type: Date,
+    default: Date.now
+  }
+  // comments: [{
+  //     type: Schema.Types.ObjectId,
+  //     ref: 'Comment'
+  // }]
 });
 
-UserSchema.methods.comparePassword = function(candidatePassword, cb) {
-    bcrypt.compare(candidatePassword, this.password, function(err, isMatch) {
-        if (err) return cb(err);
-        cb(null, isMatch);
-    });
+/**
+ * Compare the passed password with the value in the database. A model method.
+ *
+ * @param {string} password
+ * @returns {object} callback
+ */
+UserSchema.methods.comparePassword = function comparePassword(
+  password,
+  callback
+) {
+  bcrypt.compare(password, this.password, callback);
 };
 
-UserSchema.statics.getAuthenticated = function(username, password, cb) {
-    this.findOne({ username: username }, function(err, user) {
-        if (err) return cb(err);
+/**
+ * The pre-save hook method.
+ */
+UserSchema.pre('save', function saveHook(next) {
+  const user = this;
 
-        // make sure the user exists
-        if (!user) {
-            return cb(null, null, reasons.NOT_FOUND);
-        }
+  // proceed further only if the password is modified or the user is new
+  if (!user.isModified('password')) return next();
 
-        // test for a matching password
-        user.comparePassword(password, function(err, isMatch) {
-            if (err) return cb(err);
+  return bcrypt.genSalt((saltError, salt) => {
+    if (saltError) {
+      return next(saltError);
+    }
 
-            // check if the password was a match
-            if (isMatch) {
-                // if there's no lock or failed attempts, just return the user
-                if (!user.loginAttempts && !user.lockUntil) return cb(null, user);
-                // reset attempts and lock info
-                var updates = {
-                    $set: { loginAttempts: 0 },
-                    $unset: { lockUntil: 1 }
-                };
-                return user.update(updates, function(err) {
-                    if (err) return cb(err);
-                    return cb(null, user);
-                });
-            }
-        });
+    return bcrypt.hash(user.password, salt, (hashError, hash) => {
+      if (hashError) {
+        return next(hashError);
+      }
+
+      // replace a password string with hash value
+      user.password = hash;
+
+      return next();
     });
-};
+  });
+});
 
-module.exports = User = mongoose.model('User', UserSchema);
+module.exports = mongoose.model('User', UserSchema);
