@@ -9,7 +9,9 @@ const cors = require('cors');
 const topics = require('./routes/topicRoutes');
 const comments = require('./routes/commentRoutes');
 const images = require('./routes/imageRoutes');
-// const passport = require("passport");
+const authRoutes = require('./routes/auth')
+const apiRoutes = require('./routes/api');
+const passport = require("passport");
 // const LocalStrategy = require('passport-local').Strategy;
 
 app.use(cors());
@@ -17,8 +19,19 @@ app.use('/uploads', express.static('uploads'));
 app.use(bodyParser.json({limit: '50mb'}));
 app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 app.use(cookieParser());
-// app.use(passport.initialize());
+app.use(passport.initialize());
 
+// load passport strategies
+const localSignupStrategy = require('./passport/signup');
+const localLoginStrategy = require('./passport/login');
+passport.use('local-signup', localSignupStrategy);
+passport.use('local-login', localLoginStrategy);
+
+// pass the authenticaion checker middleware
+const authCheckMiddleware = require('./middleware/auth-check');
+app.use('/api', authCheckMiddleware);
+app.use('/auth', authRoutes);
+app.use('/api', apiRoutes);
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
@@ -26,6 +39,7 @@ app.use((req, res, next) => {
   res.header('Access-Control-Allow-Methods', '*'); 
   return next();
 });
+
 // Serve up static assets (usually on heroku)
 if (process.env.NODE_ENV === "production") {
   app.use(express.static("client/build"));
@@ -40,6 +54,7 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost:27017/people", 
 app.use('/api/topics', topics);
 app.use('/api/comments', comments)
 app.use('/api/uploads', images);
+// app.use('/api/users', authRoutes)
 // const registrationRoutes = require("./routes")(passport);
 // app.use(registrationRoutes);
 
