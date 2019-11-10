@@ -9,6 +9,8 @@ const cors = require('cors');
 const topics = require('./routes/topicRoutes');
 const comments = require('./routes/commentRoutes');
 const images = require('./routes/imageRoutes');
+const authRoutes = require('./routes/auth')
+const apiRoutes = require('./routes/api');
 const passport = require("passport");
 // const LocalStrategy = require('passport-local').Strategy;
 
@@ -20,21 +22,16 @@ app.use(cookieParser());
 app.use(passport.initialize());
 
 // load passport strategies
-// const localSignupStrategy = require('./server/passport/local-signup');
-// const localLoginStrategy = require('./server/passport/local-login');
-// passport.use('local-signup', localSignupStrategy);
-// passport.use('local-login', localLoginStrategy);
+const localSignupStrategy = require('./passport/signup');
+const localLoginStrategy = require('./passport/login');
+passport.use('local-signup', localSignupStrategy);
+passport.use('local-login', localLoginStrategy);
 
 // pass the authenticaion checker middleware
-// const authCheckMiddleware = require('./server/middleware/auth-check');
-// app.use('/api', authCheckMiddleware);
-
-// routes
-// const authRoutes = require('./server/routes/auth');
-// const apiRoutes = require('./server/routes/api');
-// app.use('/auth', authRoutes);
-// app.use('/api', apiRoutes);
-
+const authCheckMiddleware = require('./middleware/auth-check');
+app.use('/api', authCheckMiddleware);
+app.use('/auth', authRoutes);
+app.use('/api', apiRoutes);
 app.use((req, res, next) => {
   res.setHeader('Access-Control-Allow-Origin', '*');
   res.header('Access-Control-Allow-Headers', 'Origin, X-Requested-With, Content-Type, Accept');
@@ -57,6 +54,7 @@ mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost:27017/people", 
 app.use('/api/topics', topics);
 app.use('/api/comments', comments)
 app.use('/api/uploads', images);
+// app.use('/api/users', authRoutes)
 // const registrationRoutes = require("./routes")(passport);
 // app.use(registrationRoutes);
 
