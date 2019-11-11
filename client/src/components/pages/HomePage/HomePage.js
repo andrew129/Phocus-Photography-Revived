@@ -3,17 +3,19 @@ import React, { Component } from 'react';
 import Jumbotron from '../../Jumbotron/Jumbotron';
 import Footer from '../../Footer';
 import './style.css';
-import Wrapper from '../../../components/Wrapper';
+import Wrapper from '../../Wrapper';
 import FeaturedPictures from '../../FeaturedPictures';
 import axios from 'axios';
 
-class Home extends Component {
+class Intro extends Component {
 
     state = {
         images: [],
     }
 
     componentDidMount() {
+        // update authenticated state on logout
+        this.props.toggleAuthenticateStatus()
         this.getImages()
     }
 
@@ -118,4 +120,4 @@ class Home extends Component {
 }
 
 
-export default Home;
+export default Intro;
