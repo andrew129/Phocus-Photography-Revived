@@ -157,7 +157,7 @@ class App extends Component {
             </a>
           </li>
           <li
-            style={{ position: 'relative', left: 1100 }}
+            style={{ position: 'relative', left: 1000 }}
             className='nav-item active'
           >
             <a className='nav-link' href='/login'>
@@ -165,7 +165,7 @@ class App extends Component {
             </a>
           </li>
           <li
-            style={{ position: 'relative', left: 1100 }}
+            style={{ position: 'relative', left: 1000 }}
             className='nav-item active'
           >
             <a className='nav-link' href='/signup'>

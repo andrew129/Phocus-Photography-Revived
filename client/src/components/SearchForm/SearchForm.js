@@ -4,7 +4,7 @@ import './style.css'
 export function Input(props) {
     return (
         <div className="form-group input text-center">
-            <h1 id='statement'>Start a Discussion</h1>
+            <h1 style={{marginBottom: 50}} id='statement'>Start a Discussion</h1>
             <input id='title' name="title" onChange={props.handleChange} className="form-control" placeholder='Enter Title' value={props.title} />
         </div>
     );

@@ -1,7 +1,7 @@
 #submit {
     width: 100%;
     position: relative;
-    bottom: 100px;
+    bottom: 20px;
 }
 
 #statement {
@@ -12,14 +12,14 @@
 #message {
     height: 200px;
     position: relative;
-    bottom: 100px;
+    bottom: 20px;
     background: rgb(248, 247, 247, 0.7);
     border: black groove 2px;
 }
 
 #title {
     position: relative;
-    bottom: 100px;
+    bottom: 20px;
     background: rgb(248, 247, 247, 0.7);
     border: black groove 2px;
 }
