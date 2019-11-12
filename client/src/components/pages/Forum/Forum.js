@@ -4,7 +4,6 @@ import { Input, TextArea, FormBtn } from "../../SearchForm/SearchForm";
 import API from "../../../utils/API";
 import Topics from "../../Topics/Topics";
 import DeleteBtn from "../../DeleteBtn";
-import CommentBtn from "../../CommentBtn"
 import ShowCommentBtn from "../../ShowCommentsBtn";
 import { CommentTextArea, CommentFormBtn } from "../../CommentForm/CommentForm";
 import HideCommentBtn from "../../HideCommentBtn";
@@ -22,6 +21,7 @@ class Forum extends Component {
         topics: [],
         comments: [],
         showComponent: false,
+        selectedForm: '',
         showComments: false
     }
 
@@ -76,12 +76,13 @@ class Forum extends Component {
         })
     }
 
-    showForm = id => {
+    showForm = (id) => {
         API.getTopicById(id)
         .then(res => {
             console.log(res.data._id)
             this.setState({
                 showComponent: true,
+                selectedForm: res.data._id
             })
         })
         .catch(err => console.log(err))
@@ -94,7 +95,8 @@ class Forum extends Component {
             const messages = res.data.comments
                 this.setState({
                     comments: messages,
-                    showComments: true
+                    showComments: true,
+                    selectedForm: res.data._id
                 })
         })
         .catch(err => console.log(err))
@@ -107,6 +109,7 @@ class Forum extends Component {
     }
 
     handleSubmit = (e, id) => {
+        console.log('the e', e);
         const { text } = this.state
         e.preventDefault()
         console.log(this.state.text)
@@ -141,7 +144,7 @@ class Forum extends Component {
                                     handleSubmit={this.handleFormSubmit}
                                 />
                             </form>
-                            <h1 style={{ color: 'white', textAlign: 'center', position: 'relative', bottom: 70 }}>Current Discussions</h1>
+                            <h1 style={{ color: 'white', textAlign: 'center', position: 'relative', bottom: 70, marginTop: 70 }}>Current Discussions</h1>
                             {this.state.topics.map(topic => (
                                 <div className="comment-section">
                                     <Topics
@@ -150,43 +153,38 @@ class Forum extends Component {
                                         title={topic.title}
                                         message={topic.message}
                                     />
+
                                     <DeleteBtn
                                         deleteTopic={() => this.deleteTopic(topic._id)}
-                                    />
-                                    <CommentBtn
-                                        saveComment={() => this.showForm(topic._id)}
-                                    />
+                                        />
+                                    <button type="button" onClick={() => this.showForm(topic._id)} className="btn btn-transparent">Reply</button>
                                     <ShowCommentBtn
                                         showComments={() => this.getComments(topic._id)}
                                     />
                                     <HideCommentBtn
                                         hideComments={() => this.hideComments(topic._id)}
-                                    />
-                                    {this.state.showComments ?
-                                        <div className='comment-display'>
-                                            {this.state.comments.map(comment => (
-                                                <CommentDisplay
-                                                    id={topic._id}
-                                                    key={topic._id}
-                                                    statement={comment.text}
-                                                />
-                                            ))}
-                                        </div> :
-                                        null
-                                    }
-                                    {this.state.showComponent ?
+                                        />
+                                    {(this.state.showComponent && topic._id === this.state.selectedForm) &&
                                         <div style={{ marginTop: 30 }} className='topic-comment'>
                                             <CommentTextArea
                                                 handleChange={this.handleChange}
                                                 value={this.state.text}
-                                                key={topic._id}
-                                                id={topic._id}
                                             />
                                             <CommentFormBtn
-                                                handleCommentSubmit={(e) => this.handleSubmit(e, topic._id)}
+                                                handleCommentSubmit={(e) => this.handleSubmit(e)}
                                             /> 
-                                        </div> :
-                                        null
+                                        </div>
+                                    }
+                                    {(this.state.showComments && topic._id === this.state.selectedForm) &&
+                                        <div className='comment-display'>
+                                            {this.state.comments.map(comment => (
+                                                <CommentDisplay
+                                                id={topic._id}
+                                                key={topic._id}
+                                                statement={comment.text}
+                                                />
+                                            ))}
+                                        </div> 
                                     }
                                 </div>
                             ))}

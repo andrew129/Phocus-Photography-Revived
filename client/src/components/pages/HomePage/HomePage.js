@@ -1,4 +1,4 @@
-import NavBar from '../../NavBar/NavBar';
+// import NavBar from '../../NavBar/NavBar';
 import React, { Component } from 'react';
 import Jumbotron from '../../Jumbotron/Jumbotron';
 import Footer from '../../Footer';
@@ -10,7 +10,7 @@ import axios from 'axios';
 class Intro extends Component {
 
     state = {
-        images: [],
+        images: []
     }
 
     componentDidMount() {
@@ -78,7 +78,7 @@ class Intro extends Component {
     render() {
         return (
             <div class='everything'>
-                <NavBar/>
+                {/* <NavBar/> */}
                 <Jumbotron/>
                 <div className='container'>
                     <div className='row picture-section'>

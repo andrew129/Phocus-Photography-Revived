@@ -36,7 +36,7 @@ const NavBar = () => {
             </a>
           </li>
           <li
-            style={{ position: 'relative', left: 1008 }}
+            style={{ position: 'relative', left: 990 }}
             className='nav-item active'
           >
             <a className='nav-link' href='/Login'>
@@ -44,7 +44,7 @@ const NavBar = () => {
             </a>
           </li>
           <li
-            style={{ position: 'relative', left: 1010 }}
+            style={{ position: 'relative', left: 1000 }}
             className='nav-item active'
           >
             <a className='nav-link' href='/Register'>
