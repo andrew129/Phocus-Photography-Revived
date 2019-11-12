@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import NavBar from '../../NavBar/NavBar';
+// import NavBar from '../../NavBar/NavBar';
 import axios from 'axios'
 import UploadForm from '../../UploadForm';
 import DefaultImg from '../../../default.jpg';
@@ -109,7 +109,7 @@ class Pictures extends Component {
     render() {
         return (
             <div class='main-content'>
-               <NavBar/> 
+               {/* <NavBar/>  */}
                 <div className='container'>
                     <div className='row'>
                         <div className='col-3'>

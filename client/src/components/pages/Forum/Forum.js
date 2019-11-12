@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import NavBar from '../../NavBar/NavBar';
+// import NavBar from '../../NavBar/NavBar';
 import { Input, TextArea, FormBtn } from "../../SearchForm/SearchForm";
 import API from "../../../utils/API";
 import Topics from "../../Topics/Topics";
@@ -122,7 +122,7 @@ class Forum extends Component {
     render() {
         return (
             <div className='content'>
-                <NavBar/>
+                {/* <NavBar/> */}
                 <div className='container'>
                     <div className="row">
                         <div className='col-3'>
