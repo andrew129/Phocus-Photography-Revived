@@ -108,7 +108,7 @@ class Pictures extends Component {
 
     render() {
         return (
-            <div>
+            <div class='main-content'>
                <NavBar/> 
                 <div className='container'>
                     <div className='row'>

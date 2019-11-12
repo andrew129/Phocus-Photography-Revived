@@ -1,4 +1,4 @@
-import React, { PropTypes } from 'react';
+import React from 'react'; //add {proptypes} next to react for auth//
 import { Link } from 'react-router-dom';
 import { Card, CardText } from 'material-ui/Card';
 import RaisedButton from 'material-ui/RaisedButton';
@@ -70,12 +70,12 @@ const LoginForm = ({
   </Card>
 );
 
-LoginForm.propTypes = {
-  onSubmit: PropTypes.func.isRequired,
-  onChange: PropTypes.func.isRequired,
-  errors: PropTypes.object.isRequired,
-  successMessage: PropTypes.string.isRequired,
-  user: PropTypes.object.isRequired
-};
+// LoginForm.propTypes = {
+//   onSubmit: PropTypes.func.isRequired,
+//   onChange: PropTypes.func.isRequired,
+//   errors: PropTypes.object.isRequired,
+//   successMessage: PropTypes.string.isRequired,
+//   user: PropTypes.object.isRequired
+// };
 
 export default LoginForm;

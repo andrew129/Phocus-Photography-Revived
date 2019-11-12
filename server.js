@@ -11,8 +11,8 @@ const comments = require('./routes/commentRoutes');
 const images = require('./routes/imageRoutes');
 // const authRoutes = require('./routes/auth')
 // const apiRoutes = require('./routes/api');
-const passport = require("passport");
-const config = require('./config');
+// const passport = require("passport");
+// const config = require('./config');
 // const LocalStrategy = require('passport-local').Strategy;
 
 
@@ -21,23 +21,23 @@ app.use('/uploads', express.static('uploads'));
 app.use(bodyParser.json({limit: '50mb'}));
 app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 app.use(cookieParser());
-app.use(passport.initialize());
+// app.use(passport.initialize());
 
 // load passport strategies
-const localSignupStrategy = require('./passport/local-signup');
-const localLoginStrategy = require('./passport/local-login');
-passport.use('local-signup', localSignupStrategy);
-passport.use('local-login', localLoginStrategy);
+// const localSignupStrategy = require('./passport/local-signup');
+// const localLoginStrategy = require('./passport/local-login');
+// passport.use('local-signup', localSignupStrategy);
+// passport.use('local-login', localLoginStrategy);
 
 // pass the authenticaion checker middleware
-const authCheckMiddleware = require('./middleware/auth-check');
-app.use('/api', authCheckMiddleware);
+// const authCheckMiddleware = require('./middleware/auth-check');
+// app.use('/api', authCheckMiddleware);
 
 // Routes// routes
-const authRoutes = require('./routes/auth');
-const apiRoutes = require('./routes/api');
-app.use('/auth', authRoutes);
-app.use('/api', apiRoutes);
+// const authRoutes = require('./routes/auth');
+// const apiRoutes = require('./routes/api');
+// app.use('/auth', authRoutes);
+// app.use('/api', apiRoutes);
 
 // Serve up static assets (usually on heroku)
 if (process.env.NODE_ENV === "production") {

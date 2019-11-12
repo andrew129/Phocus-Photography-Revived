@@ -31,16 +31,11 @@ class Intro extends Component {
                 const filteredImages = res.data.filter(obj => {
                     return slicedLikes.includes(obj.likes)
                 })
+                filteredImages.sort((a, b) => b.likes - a.likes);
                 this.setState({
                     images: filteredImages
                 })
-                console.log(this.state.images)
-                // const filteredImages = res.data.filter(obj => obj.likes === slicedLikes)
-                // const maxLikes = Math.max.apply(Math,res.data.map(function(data){return data.likes;}))
-                // const filteredImages = res.data.filter(obj => obj.likes === maxLikes)
-                // this.setState({
-                //     images: filteredImages
-                // })             
+                console.log(this.state.images)         
             })
     }
 
@@ -82,14 +77,14 @@ class Intro extends Component {
 
     render() {
         return (
-            <div>
+            <div class='everything'>
                 <NavBar/>
                 <Jumbotron/>
                 <div className='container'>
-                    <div className='row'>
+                    <div className='row picture-section'>
                         <div className='col-12 text-center'>
-                        <h1 style={{marginBottom: 2}} className="display-4">Featured Photos</h1>
-                        <p style={{borderBottom: 'double', borderColor: 'blue', position: 'relative', bottom: 13, paddingBottom: 5}}>Upload your best shots and you might appear here</p>
+                        <h1 style={{marginBottom: 2, color: 'white', position: 'relative', bottom: 7}} className="display-4">Featured Photos</h1>
+                        <p style={{borderBottom: 'double', borderColor: '#0099ff', position: 'relative', bottom: 20, paddingBottom: 5, color: 'white'}}>Upload your best shots and you might appear here</p>
                         <Wrapper>
                             {this.state.images.map(image => (
                                 <div>

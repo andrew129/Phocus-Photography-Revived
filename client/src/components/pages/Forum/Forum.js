@@ -6,7 +6,7 @@ import Topics from "../../Topics/Topics";
 import DeleteBtn from "../../DeleteBtn";
 import CommentBtn from "../../CommentBtn"
 import ShowCommentBtn from "../../ShowCommentsBtn";
-import { CommentTextArea, CommentFormBtn } from "../CommentForm/CommentForm";
+import { CommentTextArea, CommentFormBtn } from "../../CommentForm/CommentForm";
 import HideCommentBtn from "../../HideCommentBtn";
 import CommentDisplay from "../../CommentDisplay";
 import "./style.css";
@@ -190,12 +190,12 @@ class Forum extends Component {
                                     }
                                 </div>
                             ))}
-                        <div className='col-3'>
+                            <div className='col-3'>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
         )
     }
 }

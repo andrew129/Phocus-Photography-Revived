@@ -5,7 +5,7 @@ const ImgSection = props => {
     return (
         <div className="card">
             <div className="img-container">
-                <img alt={props.name} src={props.photo}/>
+                <img onClick={props.showEnlarged} alt={props.name} src={props.photo}/>
             </div>
         </div>
     )
