@@ -190,12 +190,12 @@ class Forum extends Component {
                                     }
                                 </div>
                             ))}
-                        <div className='col-3'>
+                            <div className='col-3'>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
         )
     }
 }
