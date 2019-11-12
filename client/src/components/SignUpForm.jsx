@@ -1,5 +1,6 @@
-import React, { PropTypes } from 'react';
-import { Link } from 'react-router';
+import React from 'react';
+import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 import { Card, CardText } from 'material-ui/Card';
 import RaisedButton from 'material-ui/RaisedButton';
 import TextField from 'material-ui/TextField';
@@ -11,8 +12,19 @@ const SignUpForm = ({
   errors,
   user,
 }) => (
-  <Card className="container">
-    <form action="/" onSubmit={onSubmit}>
+  <Card className="container" style= {{
+    position: 'relative',
+    left: '30px',
+    top: '150px',
+    fontFamily: 'tokyoRegular',
+    height: '430px',
+    width: '630px',
+  }} >
+    <form action="/login" onSubmit={onSubmit} style= {{
+      position: 'relative',
+      top: '20px',
+      textAlign: 'center',
+    }} >
       <h2 className="card-heading">Sign Up</h2>
 
       {errors.summary && <p className="error-message">{errors.summary}</p>}
@@ -49,7 +61,10 @@ const SignUpForm = ({
       </div>
 
       <div className="button-line">
-        <RaisedButton type="submit" label="Create New Account" primary />
+        <RaisedButton type="submit" label="Create New Account" backgroundColor={121e9} style= {{
+          marginTop: "30px",
+          marginBottom: "20px",
+        }}  />
       </div>
 
       <CardText>Already have an account? <Link to={'/login'}>Log in</Link></CardText>
