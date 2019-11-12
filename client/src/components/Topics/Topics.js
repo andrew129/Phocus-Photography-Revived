@@ -10,4 +10,4 @@ export function Comments(props) {
     )
 }
 
-export default Comments 
+export default Comments;

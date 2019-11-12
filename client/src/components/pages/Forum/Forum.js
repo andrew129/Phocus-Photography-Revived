@@ -18,6 +18,7 @@ class Forum extends Component {
         title: '',
         message: '',
         text: '',
+        id: '',
         topics: [],
         comments: [],
         showComponent: false,
@@ -67,6 +68,10 @@ class Forum extends Component {
         API.saveTopic(data)
         .then(res => {
             console.log('the res', res)
+            this.setState({
+                title: '',
+                message: ''
+            })
             this.loadTopics();
         })
     }
@@ -76,7 +81,7 @@ class Forum extends Component {
         .then(res => {
             console.log(res.data._id)
             this.setState({
-                showComponent: true
+                showComponent: true,
             })
         })
         .catch(err => console.log(err))
@@ -116,7 +121,7 @@ class Forum extends Component {
 
     render() {
         return (
-            <div>
+            <div className='content'>
                 <NavBar/>
                 <div className='container'>
                     <div className="row">
@@ -140,10 +145,10 @@ class Forum extends Component {
                             {this.state.topics.map(topic => (
                                 <div className="comment-section">
                                     <Topics
-                                    id={topic._id}
-                                    key={topic._id}
-                                    title={topic.title}
-                                    message={topic.message}
+                                        id={topic._id}
+                                        key={topic._id}
+                                        title={topic.title}
+                                        message={topic.message}
                                     />
                                     <DeleteBtn
                                         deleteTopic={() => this.deleteTopic(topic._id)}
@@ -159,18 +164,18 @@ class Forum extends Component {
                                     />
                                     {this.state.showComments ?
                                         <div className='comment-display'>
-                                         {this.state.comments.map(comment => (
-                                            <CommentDisplay
-                                                id={topic._id}
-                                                key={topic._id}
-                                                statement={comment.text}
-                                            />
-                                        ))}
+                                            {this.state.comments.map(comment => (
+                                                <CommentDisplay
+                                                    id={topic._id}
+                                                    key={topic._id}
+                                                    statement={comment.text}
+                                                />
+                                            ))}
                                         </div> :
                                         null
                                     }
                                     {this.state.showComponent ?
-                                        <div style={{ marginTop: 30 }}className='topic-comment'>
+                                        <div style={{ marginTop: 30 }} className='topic-comment'>
                                             <CommentTextArea
                                                 handleChange={this.handleChange}
                                                 value={this.state.text}
@@ -185,8 +190,8 @@ class Forum extends Component {
                                     }
                                 </div>
                             ))}
-                        </div>
-                        <div className='col-3'>
+                            <div className='col-3'>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -196,3 +201,8 @@ class Forum extends Component {
 }
 
 export default Forum;
+//**IMPORTANT**//
+//**map is running show component for every item in the array need to fix**//
+//POSSIBLE FIX: DO THE MAP METHOD INSIDE OF A SEPERATE FUNCTION AND GRAB THE CURRENT ID//
+//implement rotating slideshow of pictures in background to fit the theme//
+//**---------------------------------------------------------------------- **//

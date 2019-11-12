@@ -4,11 +4,14 @@
     background-repeat: no-repeat;
     height: 650px;
     color: white;
-    border-bottom: rgb(247, 244, 244) solid 2px
+    border-bottom: rgb(240, 228, 228) solid 3px;
+    margin-bottom: 10px;
 }
 
-#title {
+#phocus {
     margin-top: 145px;
 }
+
+
 
 

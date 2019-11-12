@@ -1,0 +1,15 @@
+.footer {
+  /* left: 0;
+  bottom: 0; */
+  width: 100%;
+  background: rgb(255, 114, 19);
+  color: white;
+  text-align: center;
+  margin-top: 40px;
+  border-top: rgb(240, 228, 228) solid 3px;
+}
+
+#copyright {
+    position: relative;
+    top: 10px;
+}
