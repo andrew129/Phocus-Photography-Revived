@@ -15,7 +15,7 @@ class Intro extends Component {
 
     componentDidMount() {
         // update authenticated state on logout
-        this.props.toggleAuthenticateStatus()
+        // this.props.toggleAuthenticateStatus()
         this.getImages()
     }
 
