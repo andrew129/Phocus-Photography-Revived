@@ -43,7 +43,7 @@ class Forum extends Component {
         this.setState({
             count: this.state.count + 1
         })
-        if (this.state.count === 3) {
+        if (this.state.count === 4) {
             this.setState({
                 count: 0
             })
@@ -142,7 +142,7 @@ class Forum extends Component {
 
     render() {
         return (
-            <div style={{ backgroundImage: `url(${this.state.images[this.state.count]})` , backgroundSize: 'cover' }} className='content'>
+            <div style={{ backgroundImage: `url(${this.state.images[this.state.count]})` , backgroundSize: 'cover', backgroundRepeat: 'no-repeat', backgroundPosition: 'center' }} className='content'>
                 <div className='container'>
                     <div className="row">
                         <div className='col-3'>
