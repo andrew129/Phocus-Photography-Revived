@@ -9,7 +9,11 @@ import { CommentTextArea, CommentFormBtn } from "../../CommentForm/CommentForm";
 import HideCommentBtn from "../../HideCommentBtn";
 import CommentDisplay from "../../CommentDisplay";
 import "./style.css";
-import axios from 'axios'
+import axios from 'axios';
+import imageOne from '../../../sunset-1.jpg';
+import imageTwo from '../../../images/sunset1.JPG';
+import imageThree from '../../../images/sunset2.JPG';
+import imageFour from '../../../images/sunset3.JPG';
 
 class Forum extends Component {
 
@@ -22,14 +26,28 @@ class Forum extends Component {
         comments: [],
         showComponent: false,
         selectedForm: '',
-        showComments: false
+        showComments: false, 
+        images: [imageOne, imageTwo, imageThree, imageFour],
+        count: 0 
     }
 
     componentDidMount() {
         this.loadTopics()
+        setInterval(this.changeImage, 30000)
         this.setState({
             showComments: false
         })
+    }
+
+    changeImage = () => {
+        this.setState({
+            count: this.state.count + 1
+        })
+        if (this.state.count === 3) {
+            this.setState({
+                count: 0
+            })
+        }
     }
 
     handleChange = event => {
@@ -124,8 +142,7 @@ class Forum extends Component {
 
     render() {
         return (
-            <div className='content'>
-                {/* <NavBar/> */}
+            <div style={{ backgroundImage: `url(${this.state.images[this.state.count]})` , backgroundSize: 'cover' }} className='content'>
                 <div className='container'>
                     <div className="row">
                         <div className='col-3'>
