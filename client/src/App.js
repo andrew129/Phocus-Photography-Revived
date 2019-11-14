@@ -143,17 +143,17 @@ class App extends Component {
       </button>
       <div className='collapse navbar-collapse' id='navbarNav'>
         <ul className='navbar-nav'>
-          <li style={{position: 'relative', right: 8}} className='nav-item active'>
+          <li style={{position: 'relative', right: 12}} className='nav-item active'>
             <a className='nav-link' href='/'>
               Home <span className='sr-only'>(current)</span>
             </a>
           </li>
-          <li style={{position: 'relative', right: 8}} className='nav-item active'>
+          <li style={{position: 'relative', right: 12}} className='nav-item active'>
             <a className='nav-link' href='/pictures'>
               Pictures
             </a>
           </li>
-          <li style={{position: 'relative', right: 8}} className='nav-item active'>
+          <li style={{position: 'relative', right: 12}} className='nav-item active'>
             <a className='nav-link' href='/forum'>
               Forum
             </a>

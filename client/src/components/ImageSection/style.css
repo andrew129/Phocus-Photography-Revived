@@ -4,6 +4,7 @@
     height: 300px;
     margin: 0.5rem;
     width: 300px;
+    margin-bottom: 10px;
 }
 
 .card > .img-container {
