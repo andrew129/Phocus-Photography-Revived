@@ -11,9 +11,9 @@ import logo from './swirls.png';
 
 import "../src/components/NavBar/NavBar"
 
-import LoginPage from './containers/LoginPage.jsx';
+// import LoginPage from './containers/LoginPage.jsx';
 // import LogoutFunction from './containers/LogoutFunction.jsx';
-import SignUpPage from './containers/SignUpPage.jsx';
+// import SignUpPage from './containers/SignUpPage.jsx';
 import Auth from './utils/Auth';
 
 
@@ -179,8 +179,8 @@ class App extends Component {
     </nav>
 
             <PropsRoute exact path="/" component={HomePage} toggleAuthenticateStatus={() => this.toggleAuthenticateStatus()} />
-            <LoggedOutRoute path="/login" component={LoginPage} toggleAuthenticateStatus={() => this.toggleAuthenticateStatus()} />
-            <LoggedOutRoute path="/signup" component={SignUpPage}/>
+            {/* <LoggedOutRoute path="/login" component={LoginPage} toggleAuthenticateStatus={() => this.toggleAuthenticateStatus()} /> */}
+            {/* <LoggedOutRoute path="/signup" component={SignUpPage}/> */}
             {/* <Route path="/logout" component={LogoutFunction}/> */}
             {/* <PrivateRoute path="/commentform" component={CommentForm}/> */}
      
