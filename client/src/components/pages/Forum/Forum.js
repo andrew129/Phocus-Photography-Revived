@@ -34,7 +34,7 @@ class Forum extends Component {
 
     componentDidMount() {
         this.loadTopics()
-        setInterval(this.changeImage, 30000)
+        setInterval(this.changeImage, 15000)
         this.setState({
             showComments: false
         })
