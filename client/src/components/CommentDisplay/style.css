@@ -1,0 +1,10 @@
+#comments {
+    border-top: solid black 2px;
+    border-bottom: solid black 2px;
+    line-height: 100px;
+    overflow: scroll;
+    text-align: left;
+    padding-left: 10px;
+    padding-right: 10px;
+    height: 400px;
+}

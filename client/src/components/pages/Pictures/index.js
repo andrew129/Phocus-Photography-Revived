@@ -5,6 +5,7 @@ import UploadForm from '../../UploadForm';
 import DefaultImg from '../../../default.jpg';
 import ImgSection from '../../ImageSection';
 import Wrapper from '../../Wrapper/';
+import Footer from '../../Footer';
 import './style.css'
 
 class Pictures extends Component {
@@ -13,7 +14,9 @@ class Pictures extends Component {
         images: [],
         likes: 0,
         dislikes: 0,
-        showEnlarged: false
+        showEnlarged: false,
+        liked: false,
+        disliked: false
     }
 
     componentDidMount() {
@@ -74,17 +77,36 @@ class Pictures extends Component {
         axios.get('/api/uploads/' + id)
             .then(res => {
                 console.log(res)
-                const data = {
-                    likes: res.data.likes + 1,
-                    dislikes: res.data.dislikes
-                }
-                this.setState(data)
-                axios.put('/api/uploads/' + id, data)
+                if (this.state.liked === false) {
+                    const data = {
+                        likes: res.data.likes + 1,
+                        dislikes: res.data.dislikes
+                    }
+                    this.setState(data)
+                    axios.put('/api/uploads/' + id, data)
                     .then(res => {
                         console.log(res)
                         this.getImages()
+                        this.setState({
+                            liked: true
+                        })
                     })
                     .catch(err => console.log(err))
+                }
+                if (this.state.liked === true) {
+                    alert('stop')
+                    const data = {
+                        likes: res.data.likes,
+                        dislikes: res.data.dislikes
+                    }
+                    this.setState(data)
+                    axios.put('/api/uploads/' + id, data)
+                        .then(res => {
+                            console.log(res)
+                            this.getImages()
+                        })
+                        .catch(err => console.log(err))
+                }
             })
     }
 
@@ -93,7 +115,7 @@ class Pictures extends Component {
         .then(res => {
             console.log(res)
             const data = {
-                likes: res.data.likes,
+                likes: res.data.likes - 1,
                 dislikes: res.data.dislikes + 1
             }
             this.setState(data)
@@ -101,6 +123,9 @@ class Pictures extends Component {
                 .then(res => {
                     console.log(res)
                     this.getImages()
+                    this.setState({
+                        disliked: false
+                    })
                 })
                 .catch(err => console.log(err))
         })
@@ -136,7 +161,7 @@ class Pictures extends Component {
                                             photo={image.imageData}
                                             showEnlarged={() => this.showEnlarged(image._id)}
                                         />
-                                        <button id='buttonone' style={{position: 'relative', bottom: 41, left: 8}} onClick={() => this.updateLikes(image._id)} className='like'>
+                                        <button id='buttonone' style={{position: 'relative', bottom: 40, left: 8}} onClick={() => this.updateLikes(image._id)} className='like'>
                                             <span style={{color: 'blue'}} className="like"><i className="fa fa-thumbs-up"></i></span>
                                             <span className='count'>{image.likes}</span>
                                         </button>
@@ -172,6 +197,7 @@ class Pictures extends Component {
                         </div>
                     </div>
                 </div>
+                <Footer/>
             </div>
         )
     }

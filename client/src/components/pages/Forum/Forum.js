@@ -8,6 +8,7 @@ import ShowCommentBtn from "../../ShowCommentsBtn";
 import { CommentTextArea, CommentFormBtn } from "../../CommentForm/CommentForm";
 import HideCommentBtn from "../../HideCommentBtn";
 import CommentDisplay from "../../CommentDisplay";
+import Footer from "../../Footer/";
 import "./style.css";
 import axios from 'axios';
 import imageOne from '../../../sunset-1.jpg';
@@ -173,7 +174,7 @@ class Forum extends Component {
 
                                     <DeleteBtn
                                         deleteTopic={() => this.deleteTopic(topic._id)}
-                                        />
+                                    />
                                     <button type="button" onClick={() => this.showForm(topic._id)} className="btn btn-transparent">Reply</button>
                                     <ShowCommentBtn
                                         showComments={() => this.getComments(topic._id)}
@@ -188,12 +189,12 @@ class Forum extends Component {
                                                 value={this.state.text}
                                             />
                                             <CommentFormBtn
-                                                handleCommentSubmit={(e) => this.handleSubmit(e)}
+                                                handleCommentSubmit={(e) => this.handleSubmit(e, topic._id)}
                                             /> 
                                         </div>
                                     }
                                     {(this.state.showComments && topic._id === this.state.selectedForm) &&
-                                        <div className='comment-display'>
+                                        <div style={{ paddingTop: 15, position: 'relative', top: 10, marginBottom: 20, fontSize: 19 }} className='comment-display'>
                                             {this.state.comments.map(comment => (
                                                 <CommentDisplay
                                                 id={topic._id}
@@ -210,6 +211,7 @@ class Forum extends Component {
                         </div>
                     </div>
                 </div>
+                <Footer/>
             </div>
         )
     }
