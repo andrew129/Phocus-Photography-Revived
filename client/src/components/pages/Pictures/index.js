@@ -5,6 +5,7 @@ import UploadForm from '../../UploadForm';
 import DefaultImg from '../../../default.jpg';
 import ImgSection from '../../ImageSection';
 import Wrapper from '../../Wrapper/';
+// import Input from '../../SearchForm/SearchForm'
 import Footer from '../../Footer';
 import './style.css'
 
@@ -16,7 +17,9 @@ class Pictures extends Component {
         dislikes: 0,
         showEnlarged: false,
         liked: false,
-        disliked: false
+        disliked: false,
+        selectedPhoto: '',
+        name: ''
     }
 
     componentDidMount() {
@@ -76,6 +79,9 @@ class Pictures extends Component {
     updateLikes = id => {
         axios.get('/api/uploads/' + id)
             .then(res => {
+                this.setState({
+                    selectedPhoto: res.data.id
+                })
                 console.log(res)
                 if (this.state.liked === false) {
                     const data = {
@@ -94,6 +100,46 @@ class Pictures extends Component {
                     .catch(err => console.log(err))
                 }
                 if (this.state.liked === true) {
+                    alert("Stop, you've already voted on this picture")
+                    const data = {
+                        likes: res.data.likes,
+                        dislikes: res.data.dislikes
+                    }
+                    this.setState(data)
+                    axios.put('/api/uploads/' + id, data)
+                        .then(res => {
+                            console.log(res)
+                            this.getImages()
+                            this.setState({
+                                liked: false
+                            })
+                        })
+                        .catch(err => console.log(err))
+                }
+            })
+    }
+
+    updateDislikes = id => {
+        axios.get('/api/uploads/' + id)
+            .then(res => {
+                console.log(res)
+                if (this.state.disliked === false) {
+                    const data = {
+                        likes: res.data.likes,
+                        dislikes: res.data.dislikes + 1
+                    }
+                    this.setState(data)
+                    axios.put('/api/uploads/' + id, data)
+                    .then(res => {
+                        console.log(res)
+                        this.getImages()
+                        this.setState({
+                            disliked: true
+                        })
+                    })
+                    .catch(err => console.log(err))
+                }
+                if (this.state.disliked === true) {
                     alert('stop')
                     const data = {
                         likes: res.data.likes,
@@ -104,31 +150,13 @@ class Pictures extends Component {
                         .then(res => {
                             console.log(res)
                             this.getImages()
+                            this.setState({
+                                disliked: false
+                            })
                         })
                         .catch(err => console.log(err))
                 }
             })
-    }
-
-    updateDislikes = id => {
-        axios.get('/api/uploads/' + id)
-        .then(res => {
-            console.log(res)
-            const data = {
-                likes: res.data.likes - 1,
-                dislikes: res.data.dislikes + 1
-            }
-            this.setState(data)
-            axios.put('/api/uploads/' + id, data)
-                .then(res => {
-                    console.log(res)
-                    this.getImages()
-                    this.setState({
-                        disliked: false
-                    })
-                })
-                .catch(err => console.log(err))
-        })
     }
 
     render() {
@@ -140,6 +168,10 @@ class Pictures extends Component {
                         <div className='col-3'>
                         </div>
                         <div className='col-6'>
+                            {/* <Input
+                                value={this.state.name}
+                                handleChange={this.handleChange}
+                            /> */}
                             <UploadForm
                                 handleChange={this.uploadImage}
                                 image={this.state.multerImage}
@@ -169,7 +201,7 @@ class Pictures extends Component {
                                             <span style={{color: 'red'}} className="like"><i className="fa fa-thumbs-down"></i></span>
                                             <span className='counttwo'>{image.dislikes}</span>
                                         </button>
-                                        <button type="button" onClick={() => this.deleteImage(image._id)} className="btn btn-danger">Delete Image</button>
+                                        {/* <button type="button" onClick={() => this.deleteImage(image._id)} className="btn btn-danger">Delete Image</button> */}
                                     </div>
                                     // {this.state.showEnlarged ?
                                     //     <div className="modal" tabindex="-1" role="dialog">
