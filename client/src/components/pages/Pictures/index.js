@@ -153,7 +153,7 @@ class Pictures extends Component {
                         <div className='col-12'>
                             <Wrapper>
                                 {this.state.images.map(image => (
-                                    <div key={image._id}>
+                                    <div class='image-section' key={image._id}>
                                         <ImgSection
                                             name='empty'
                                             key={image._id}
