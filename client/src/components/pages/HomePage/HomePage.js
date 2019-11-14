@@ -62,7 +62,7 @@ class Intro extends Component {
         .then(res => {
             console.log(res)
             const data = {
-                likes: res.data.likes,
+                likes: res.data.likes - 1,
                 dislikes: res.data.dislikes + 1
             }
             this.setState(data)

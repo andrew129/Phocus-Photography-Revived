@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Route, Redirect} from "react-router-dom"; //
 import Forum from "../src/components/pages/Forum/Forum"; // add /Forum
 import HomePage from "../src/components/pages/HomePage/HomePage"; // add /Homepage
 import Pictures from "../src/components/pages/Pictures/"; // add /Pictures
+import logo from './swirls.png';
 // original //
 
 import "../src/components/NavBar/NavBar"
@@ -125,7 +126,8 @@ class App extends Component {
         <Router>   
         <div>
         <nav className='navbar navbar-expand-lg'>
-      <a className='navbar-brand' href='/'>
+        <img style={{height: 50, width: 52, position: 'relative', right: 13, marginLeft: 5}} src={logo} alt='empty'></img>
+      <a style={{position: 'relative', right: 8}} className='navbar-brand' href='/'>
         Phocus
       </a>
       <button
@@ -141,23 +143,23 @@ class App extends Component {
       </button>
       <div className='collapse navbar-collapse' id='navbarNav'>
         <ul className='navbar-nav'>
-          <li className='nav-item active'>
+          <li style={{position: 'relative', right: 8}} className='nav-item active'>
             <a className='nav-link' href='/'>
               Home <span className='sr-only'>(current)</span>
             </a>
           </li>
-          <li className='nav-item active'>
+          <li style={{position: 'relative', right: 8}} className='nav-item active'>
             <a className='nav-link' href='/pictures'>
               Pictures
             </a>
           </li>
-          <li className='nav-item active'>
+          <li style={{position: 'relative', right: 8}} className='nav-item active'>
             <a className='nav-link' href='/forum'>
               Forum
             </a>
           </li>
           <li
-            style={{ position: 'relative', left: 1000 }}
+            style={{ position: 'relative', left: 960 }}
             className='nav-item active'
           >
             <a className='nav-link' href='/login'>
@@ -165,7 +167,7 @@ class App extends Component {
             </a>
           </li>
           <li
-            style={{ position: 'relative', left: 1000 }}
+            style={{ position: 'relative', left: 960 }}
             className='nav-item active'
           >
             <a className='nav-link' href='/signup'>
