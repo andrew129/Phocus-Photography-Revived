@@ -54,7 +54,7 @@ mongoose.connection.on('error', (err) => {
 });
 
 // load models
-require('./models/user');
+// require('./models/User');
 
 // Send every request to the React app
 // Define any API routes before this runs
