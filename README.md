@@ -14,5 +14,10 @@ This website was created to give photographers a chance to upload their original
 - MongoDB
 - Bootstrap
 
+## Authors
+
+- Andrew Stiles
+- Minh Pham
+
 
 
