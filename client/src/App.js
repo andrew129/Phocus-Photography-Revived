@@ -40,18 +40,18 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 //   )}/>
 // )
 
-const LoggedOutRoute = ({ component: Component, ...rest }) => (
-  <Route {...rest} render={props => (
-    Auth.isUserAuthenticated() ? (
-      <Redirect to={{
-        pathname: '/',
-        state: { from: props.location }
-      }}/>
-    ) : (
-      <Component {...props} {...rest} />
-    )
-  )}/>
-)
+// const LoggedOutRoute = ({ component: Component, ...rest }) => (
+//   <Route {...rest} render={props => (
+//     Auth.isUserAuthenticated() ? (
+//       <Redirect to={{
+//         pathname: '/',
+//         state: { from: props.location }
+//       }}/>
+//     ) : (
+//       <Component {...props} {...rest} />
+//     )
+//   )}/>
+// )
 
 const PropsRoute = ({ component: Component, ...rest }) => (
   <Route {...rest} render={props => (
@@ -84,36 +84,36 @@ class App extends Component {
 
   };
 
-  componentDidMount() {
-    // check if user is logged in on refresh
-    this.toggleAuthenticateStatus()
+  // componentDidMount() {
+  //   // check if user is logged in on refresh
+  //   this.toggleAuthenticateStatus()
 
-  }
+  // }
 
-  toggleAuthenticateStatus() {
-    // check authenticated status and toggle state based on that
-    this.setState({ authenticated: Auth.isUserAuthenticated(),
-    userId: Auth.getUserId() })
+  // toggleAuthenticateStatus() {
+  //   // check authenticated status and toggle state based on that
+  //   this.setState({ authenticated: Auth.isUserAuthenticated(),
+  //   userId: Auth.getUserId() })
 
-  }
+  // }
 
-  handleSmoothScrollContact = (event) => {
-    event.preventDefault ()
-   var element = document.getElementById("contact");
-   element.scrollIntoView({behavior: "smooth"});
-  }
+  // handleSmoothScrollContact = (event) => {
+  //   event.preventDefault ()
+  //  var element = document.getElementById("contact");
+  //  element.scrollIntoView({behavior: "smooth"});
+  // }
 
-  handleSmoothScrollServices = (event) => {
-    event.preventDefault ()
-   var element = document.getElementById("services");
-   element.scrollIntoView({behavior: "smooth"});
-  }
+  // handleSmoothScrollServices = (event) => {
+  //   event.preventDefault ()
+  //  var element = document.getElementById("services");
+  //  element.scrollIntoView({behavior: "smooth"});
+  // }
 
-  handleSmoothScrollAbout = (event) => {
-    event.preventDefault ()
-   var element = document.getElementById("about");
-   element.scrollIntoView({behavior: "smooth"});
-  }
+  // handleSmoothScrollAbout = (event) => {
+  //   event.preventDefault ()
+  //  var element = document.getElementById("about");
+  //  element.scrollIntoView({behavior: "smooth"});
+  // }
 
   // User Login/Register
 
@@ -122,7 +122,7 @@ class App extends Component {
   render() {
     return (
     <div>
-      <MuiThemeProvider muiTheme={getMuiTheme()}>
+      {/* <MuiThemeProvider muiTheme={getMuiTheme()}> */}
         <Router>   
         <div>
         <nav className='navbar navbar-expand-lg'>
@@ -193,7 +193,7 @@ class App extends Component {
            </div>
       
         </Router> 
-      </MuiThemeProvider>
+      {/* </MuiThemeProvider> */}
     </div> 
              
 
