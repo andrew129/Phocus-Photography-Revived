@@ -1,3 +1,6 @@
 # Phocus Photography
 
+## Technologies Used
+
+
 
