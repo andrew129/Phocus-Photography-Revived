@@ -4,11 +4,17 @@ const PORT = process.env.PORT || 3001;
 const app = express();
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
+const passport = require('./passport');
+const session = require('express-session')
+const dbConnection = require('./models') 
+const MongoStore = require('connect-mongo')(session)
 const mongoose = require('mongoose')
 const cors = require('cors');
 const topics = require('./routes/topicRoutes');
 const comments = require('./routes/commentRoutes');
 const images = require('./routes/imageRoutes');
+const user = require('./routes/userRoutes')
+
 // const authRoutes = require('./routes/auth')
 // const apiRoutes = require('./routes/api');
 // const passport = require("passport");
@@ -21,7 +27,8 @@ app.use('/uploads', express.static('uploads'));
 app.use(bodyParser.json({limit: '50mb'}));
 app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 app.use(cookieParser());
-// app.use(passport.initialize());
+app.use(passport.initialize())
+app.use(passport.session())
 
 // load passport strategies
 // const localSignupStrategy = require('./passport/local-signup');
@@ -61,9 +68,16 @@ mongoose.connection.on('error', (err) => {
 app.use('/api/topics', topics);
 app.use('/api/comments', comments)
 app.use('/api/uploads', images);
-// app.use('/api/users', authRoutes)
-// const registrationRoutes = require("./routes")(passport);
-// app.use(registrationRoutes);
+app.use('/user', user)
+
+app.use(
+	session({
+		secret: 'fraggle-rock', //pick a random string to make the hash that is generated secure
+		store: new MongoStore({ mongooseConnection: dbConnection }),
+		resave: false, //required
+		saveUninitialized: false //required
+	})
+)
 
 app.get("*", function(req, res) {
   res.sendFile(path.join(__dirname, "./client/build/index.html"));

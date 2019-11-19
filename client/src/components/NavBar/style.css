@@ -1,6 +1,16 @@
-.navbar {
+
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+    height: 80px;
+  }
+  
+  .navbar {
     background: rgb(255, 114, 19);
-    color: white;
     border-bottom: white solid 2px;
     margin-bottom: 0;
-}
+  }
+  
+  @keyframes App-logo-spin {
+    from { transform: rotate(0deg); }
+    to { transform: rotate(360deg); }
+  }
