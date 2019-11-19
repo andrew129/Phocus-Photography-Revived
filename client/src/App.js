@@ -53,11 +53,11 @@ import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 //   )}/>
 // )
 
-const PropsRoute = ({ component: Component, ...rest }) => (
-  <Route {...rest} render={props => (
-    <Component {...props} {...rest} />
-  )}/>
-)
+// const PropsRoute = ({ component: Component, ...rest }) => (
+//   <Route {...rest} render={props => (
+//     <Component {...props} {...rest} />
+//   )}/>
+// )
 
 
 // const App = () => (
@@ -178,14 +178,14 @@ class App extends Component {
       </div>
     </nav>
 
-            <PropsRoute exact path="/" component={HomePage} toggleAuthenticateStatus={() => this.toggleAuthenticateStatus()} />
+            {/* <PropsRoute exact path="/" component={HomePage} toggleAuthenticateStatus={() => this.toggleAuthenticateStatus()} /> */}
             {/* <LoggedOutRoute path="/login" component={LoginPage} toggleAuthenticateStatus={() => this.toggleAuthenticateStatus()} /> */}
             {/* <LoggedOutRoute path="/signup" component={SignUpPage}/> */}
             {/* <Route path="/logout" component={LogoutFunction}/> */}
             {/* <PrivateRoute path="/commentform" component={CommentForm}/> */}
      
 
-            {/* <Route exact path="/" component={HomePage} />*/}
+            <Route exact path="/" component={HomePage} />
 
             <Route exact path="/forum" component={Forum} />
             <Route exact path="/pictures" component={Pictures} /> 
