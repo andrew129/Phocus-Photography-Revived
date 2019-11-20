@@ -13,7 +13,7 @@ const strategy = new LocalStrategy(
       if (!user) {
         return done(null, false, { message: 'Incorrect email' });
       }
-      if (!user.checkPassword(password)) {
+      if (!user.validPassword(password)) {
         return done(null, false, { message: 'Incorrect password' });
       }
       return done(null, user);

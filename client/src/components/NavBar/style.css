@@ -1,6 +1,17 @@
 .navbar {
-    background: rgb(255, 114, 19);
-    color: white;
-    border-bottom: white solid 2px;
-    margin-bottom: 0;
+  color: white;
+  border-bottom: white solid 2px;
+  margin-bottom: 0;
+}
+
+.navbar {
+  background: rgb(255, 114, 19);
+  margin-top: auto;
+}
+#top-filler {
+  margin-bottom: auto;
+}
+
+#nav-container {
+  align-items: flex-end;
 }

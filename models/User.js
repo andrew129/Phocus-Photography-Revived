@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 // const Schema = require('mongoose.Schema');
 const bcrypt = require('bcrypt');
 
+delete mongoose.connection.models['User'];
 // define the User model schema
 const UserSchema = new mongoose.Schema({
   first_name: {
@@ -14,16 +15,12 @@ const UserSchema = new mongoose.Schema({
   },
   email: {
     type: String,
-    required: true,
-    index: { unique: true }
+    required: true
+    // index: { unique: true }
   },
   password: {
     type: String,
     required: true
-  },
-  date: {
-    type: Date,
-    default: Date.now
   }
   // comments: [{
   //     type: Schema.Types.ObjectId,
