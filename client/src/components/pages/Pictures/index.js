@@ -20,20 +20,35 @@ class Pictures extends Component {
         disliked: false,
         selectedPhoto: '',
         name: '',
-        users: []
     }
 
     componentDidMount() {
         this.getImages()
-        this.getUsers()
     }
 
+    handleChange = event => {
+        console.log(event.target)
+        const { name, value } = event.target
+        this.setState({
+            [name]: value
+        })
+    }
+
+    // getUser = () => {
+    //     axios.get('/user/login').then(response => {
+    //         console.log('my response' + response.data)
+    //     })
+    // }
+
     uploadImage = event => {
+        event.preventDefault()
+        console.log(this.state.name)
         console.log('hello')
         let imageFormObj = new FormData()
 
         imageFormObj.append("imageName", "multer-image-" + Date.now())
         imageFormObj.append("imageData", event.target.files[0])
+        imageFormObj.append("name", this.state.name)
 
         this.setState({
             multerImage: URL.createObjectURL(event.target.files[0])
@@ -50,13 +65,9 @@ class Pictures extends Component {
                 console.log(err)
                 alert("Error While Uploading")
             })
-        axios.post('/user/:id/', imageFormObj)
-            .then((data) => {
-                console.log(data)
-            })
-            .catch((err) => {
-                console.log(err)
-            })
+        this.setState({
+            name: ''
+        })
     }
 
     getImages = () => {
@@ -65,16 +76,6 @@ class Pictures extends Component {
                 console.log(res)
                 this.setState({
                     images: res.data,
-                })
-            })
-    }
-
-    getUsers = () => {
-        axios.get('/user/')
-            .then(res => {
-                console.log(res)
-                this.setState({
-                    users: res.data.User
                 })
             })
     }
@@ -161,7 +162,7 @@ class Pictures extends Component {
                 if (this.state.disliked === true) {
                     alert('stop')
                     const data = {
-                        likes: res.data.likes,
+                        likes: res.data.likes - 1,
                         dislikes: res.data.dislikes
                     }
                     this.setState(data)
@@ -195,7 +196,10 @@ class Pictures extends Component {
                                 handleChange={this.uploadImage}
                                 image={this.state.multerImage}
                             />
-                            <button style={{marginLeft: 180, position: 'relative', bottom: 69, left: 5}} type="button" onClick={this.putOnPage} className="btn btn-success">Click here to Upload</button>
+                            <div className="form-group input text-center">
+                                <input style={{position: 'relative', bottom: 318, width: 400, left: 70}} id='name' name="name" onChange={this.handleChange} className="form-control" placeholder='Enter Full Name' value={this.state.name} />
+                            </div>
+                            <button style={{marginLeft: 180, position: 'relative', bottom: 115, left: 5}} type="button" onClick={this.putOnPage} className="btn btn-success">Click here to Upload</button>
                         </div>
                         <div className='col-3'>
                         </div>
@@ -210,14 +214,14 @@ class Pictures extends Component {
                                             key={image._id}
                                             id={image._id}
                                             photo={image.imageData}
-                                            showEnlarged={() => this.showEnlarged(image._id)}
                                         />
-                                        <button id='buttonone' style={{position: 'relative', bottom: 40, left: 8}} onClick={() => this.updateLikes(image._id)} className='like'>
+                                        <h3 id='yourname'>{image.name}</h3>
+                                        <button id='buttonone' style={{position: 'relative', bottom: 78, left: 8}} onClick={() => this.updateLikes(image._id)} className='like'>
                                             <span style={{color: 'blue'}} className="like"><i className="fa fa-thumbs-up"></i></span>
                                             <span className='count'>{image.likes}</span>
                                         </button>
-                                        <button id='buttontwo' style={{position: 'relative', bottom: 41, left: 220}} onClick={() => this.updateDislikes(image._id)} className='dislike'>
-                                            <span style={{color: 'red'}} className="like"><i className="fa fa-thumbs-down"></i></span>
+                                        <button id='buttontwo' style={{position: 'relative', bottom: 78, left: 208}} onClick={() => this.updateDislikes(image._id)} className='dislike'>
+                                            <span style={{color: 'red'}} className="dislike"><i className="fa fa-thumbs-down"></i></span>
                                             <span className='counttwo'>{image.dislikes}</span>
                                         </button>
                                         {/* <button type="button" onClick={() => this.deleteImage(image._id)} className="btn btn-danger">Delete Image</button> */}

@@ -16,7 +16,7 @@ class App extends Component {
     super()
     this.state = {
       loggedIn: false,
-      first_name: null
+      first_name: ''
     }
 
     this.getUser = this.getUser.bind(this)
@@ -34,6 +34,7 @@ class App extends Component {
 
   getUser() {
     axios.get('/user/').then(response => {
+      console.log(response)
       console.log('Get user response: ')
       console.log(response.data)
       if (response.data.user) {
@@ -47,13 +48,14 @@ class App extends Component {
         console.log('Get user: no user');
         this.setState({
           loggedIn: false,
-          first_name: null
+          first_name: ''
         })
       }
     })
   }
 
   render() {
+    console.log(this.state.first_name)
     return (
       <Router>
       <div className="App">
