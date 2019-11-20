@@ -19,11 +19,13 @@ class Pictures extends Component {
         liked: false,
         disliked: false,
         selectedPhoto: '',
-        name: ''
+        name: '',
+        users: []
     }
 
     componentDidMount() {
         this.getImages()
+        this.getUsers()
     }
 
     uploadImage = event => {
@@ -48,6 +50,13 @@ class Pictures extends Component {
                 console.log(err)
                 alert("Error While Uploading")
             })
+        axios.post('/user/:id/', imageFormObj)
+            .then((data) => {
+                console.log(data)
+            })
+            .catch((err) => {
+                console.log(err)
+            })
     }
 
     getImages = () => {
@@ -56,6 +65,16 @@ class Pictures extends Component {
                 console.log(res)
                 this.setState({
                     images: res.data,
+                })
+            })
+    }
+
+    getUsers = () => {
+        axios.get('/user/')
+            .then(res => {
+                console.log(res)
+                this.setState({
+                    users: res.data.User
                 })
             })
     }
