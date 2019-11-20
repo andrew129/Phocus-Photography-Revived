@@ -77,7 +77,7 @@ class Intro extends Component {
 
     render() {
         return (
-            <div class='everything'>
+            <div className='everything'>
                 {/* <NavBar/> */}
                 <Jumbotron/>
                 <div className='container'>
