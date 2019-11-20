@@ -1,6 +1,6 @@
 const router = require("express").Router();
 // const userController = require("../../controllers/userController");
-const passport = require('../../passport')
+const passport = require('../passport')
 const User = require('../models/User')
 
 router.post('/', (req, res) => {

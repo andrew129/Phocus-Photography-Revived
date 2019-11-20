@@ -1,13 +1,13 @@
 
   .App-logo {
     animation: App-logo-spin infinite 20s linear;
-    height: 80px;
   }
   
   .navbar {
     background: rgb(255, 114, 19);
     border-bottom: white solid 2px;
     margin-bottom: 0;
+    height: 65px;
   }
   
   @keyframes App-logo-spin {

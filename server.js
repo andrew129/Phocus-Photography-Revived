@@ -6,14 +6,13 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const passport = require('./passport');
 const session = require('express-session')
-const dbConnection = require('./models') 
-const MongoStore = require('connect-mongo')(session)
 const mongoose = require('mongoose')
 const cors = require('cors');
 const topics = require('./routes/topicRoutes');
 const comments = require('./routes/commentRoutes');
+const dotenv = require('dotenv').config();
 const images = require('./routes/imageRoutes');
-const user = require('./routes/userRoutes')
+const user = require('./routes/userRoutes')(passport)
 
 // const authRoutes = require('./routes/auth')
 // const apiRoutes = require('./routes/api');
@@ -23,6 +22,7 @@ const user = require('./routes/userRoutes')
 
 
 app.use(cors());
+app.use(passport.initialize());
 app.use('/uploads', express.static('uploads'));
 app.use(bodyParser.json({limit: '50mb'}));
 app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
@@ -62,6 +62,7 @@ mongoose.connection.on('error', (err) => {
 
 // load models
 // require('./models/User');
+require('./models/User')(passport);
 
 // Send every request to the React app
 // Define any API routes before this runs
@@ -73,7 +74,6 @@ app.use('/user', user)
 app.use(
 	session({
 		secret: 'fraggle-rock', //pick a random string to make the hash that is generated secure
-		store: new MongoStore({ mongooseConnection: dbConnection }),
 		resave: false, //required
 		saveUninitialized: false //required
 	})
