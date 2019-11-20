@@ -69,7 +69,9 @@ router.post(
   (req, res) => {
       console.log('logged in', req.user);
       var userInfo = {
-          email: req.user.email
+          email: req.user.email,
+          first_name: req.user.first_name,
+          last_name: req.user.last_name
       };
       res.send(userInfo);
   }
@@ -85,24 +87,24 @@ router.get('/', (req, res, next) => {
   }
 })
 
-router.route('/:id')
-    .post(upload.single('imageData'), (req, res, next) => {
-        console.log(req.body)
-        db.Image.create({
-            imageName: req.body.imageName,
-            imageData: req.file.path
-        })
-        .then(function(dbImage) {
-            console.log(dbImage)
-            return User.findOneAndUpdate({ _id: req.params.id }, { $push: { images: dbImage._id }}, { new: true });
-        })
-        .then(function(data) {
-            res.json(data)
-        })
-        .catch(function(err) {
-            res.json(err)
-        })
-    })
+// router.route('/:id')
+//     .post(upload.single('imageData'), (req, res, next) => {
+//         console.log(req.body)
+//         db.Image.create({
+//             imageName: req.body.imageName,
+//             imageData: req.file.path
+//         })
+//         .then(function(dbImage) {
+//             console.log(dbImage)
+//             return User.findOneAndUpdate({ _id: req.params.id }, { $push: { images: dbImage._id }}, { new: true });
+//         })
+//         .then(function(data) {
+//             res.json(data)
+//         })
+//         .catch(function(err) {
+//             res.json(err)
+//         })
+//     })
 
 router.post('/logout', (req, res) => {
   if (req.user) {

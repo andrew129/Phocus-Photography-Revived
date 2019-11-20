@@ -6,3 +6,12 @@
     background: rgb(58, 57, 57);
     padding-top: 0;
 }
+
+#thisname {
+    font-family: 'Dancing Script', cursive;
+    position: relative;
+    bottom: 37px;
+    left: 5px;
+    color: white;
+    opacity: 0.6; 
+}

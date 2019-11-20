@@ -16,6 +16,9 @@ const ImageSchema = new Schema({
     },
     dislikes: {
         type: Number,
+    },
+    name: {
+        type: String
     }
 });
 

@@ -94,6 +94,7 @@ class Intro extends Component {
                                         name='empty'
                                         photo={image.imageData}
                                     />
+                                    <h3 id='thisname' style={{right: -50}}>{image.name}</h3>
                                     <button id='buttonone' onClick={() => this.updateLikes(image._id)} className='like'>
                                         <span style={{color: 'blue'}} class="like"><i className="fa fa-thumbs-up"></i></span>
                                         <span className='count'>{image.likes}</span>
