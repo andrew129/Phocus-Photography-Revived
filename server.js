@@ -12,13 +12,7 @@ const topics = require('./routes/topicRoutes');
 const comments = require('./routes/commentRoutes');
 const dotenv = require('dotenv').config();
 const images = require('./routes/imageRoutes');
-const user = require('./routes/userRoutes')(passport)
-
-// const authRoutes = require('./routes/auth')
-// const apiRoutes = require('./routes/api');
-// const passport = require("passport");
-// const config = require('./config');
-// const LocalStrategy = require('passport-local').Strategy;
+const user = require('./routes/userRoutes');
 
 
 app.use(cors());
@@ -53,7 +47,7 @@ if (process.env.NODE_ENV === "production") {
 
 //connecting to mongoose
 mongoose.promise = Promise
-mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost:27017/people", { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect(process.env.MONGODB_URI || "mongodb://localhost:27017/people", { useNewUrlParser: true });
 
 mongoose.connection.on('error', (err) => {
   console.error(`Mongoose connection error: ${err}`);

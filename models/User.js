@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 // const Schema = require('mongoose.Schema');
 const bcrypt = require('bcrypt');
-
+const Schema = mongoose.Schema;
 // define the User model schema
 const UserSchema = new mongoose.Schema({
   first_name: {
@@ -21,10 +21,10 @@ const UserSchema = new mongoose.Schema({
     type: String,
     required: true
   },
-  // comments: [{
-  //     type: Schema.Types.ObjectId,
-  //     ref: 'Comment'
-  // }]
+  images: [{
+      type: Schema.Types.ObjectId,
+      ref: 'Image'
+  }]
 });
 
 /**

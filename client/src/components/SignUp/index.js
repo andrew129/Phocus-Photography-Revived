@@ -59,31 +59,31 @@ render() {
 					</div>
 					<div className="col-3 col-mr-auto">
 						<input className="form-input"
-							placeholder="password"
-							type="password"
-							name="password"
-							value={this.state.password}
+							placeholder="First Name"
+							type="text"
+							name="first_name"
+							value={this.state.first_name}
 							onChange={this.handleChange}
 						/>
 					</div>
 				</div>
                 <div className="form-group">
 					<div className="col-1 col-ml-auto">
-						<label className="form-label" htmlFor="password">First Name: </label>
+						<label className="form-label" htmlFor="password">Last Name: </label>
 					</div>
 					<div className="col-3 col-mr-auto">
 						<input className="form-input"
-							placeholder="password"
-							type="password"
-							name="password"
-							value={this.state.password}
+							placeholder="Last Name"
+							type="text"
+							name="last_name"
+							value={this.state.last_name}
 							onChange={this.handleChange}
 						/>
 					</div>
 				</div>
 				<div className="form-group">
 					<div className="col-1 col-ml-auto">
-						<label className="form-label" htmlFor="email">email</label>
+						<label className="form-label" htmlFor="email">email: </label>
 					</div>
 					<div className="col-3 col-mr-auto">
 						<input className="form-input"
@@ -125,4 +125,4 @@ render() {
 }
 }
 
-export default Signup
+export default Signup;

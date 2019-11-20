@@ -16,6 +16,7 @@ class LoginForm extends Component {
     }
 
     handleChange(event) {
+        console.log(event.target)
         this.setState({
             [event.target.name]: event.target.value
         })
@@ -46,8 +47,7 @@ class LoginForm extends Component {
                 }
             }).catch(error => {
                 console.log('login error: ')
-                console.log(error);
-                
+                console.log(error);  
             })
     }
 

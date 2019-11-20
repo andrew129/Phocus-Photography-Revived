@@ -1,7 +1,34 @@
 const router = require("express").Router();
-// const userController = require("../../controllers/userController");
 const passport = require('../passport')
 const User = require('../models/User')
+const db = require('../models')
+const multer = require('multer')
+
+const storage = multer.diskStorage({
+    destination: function(req, file, cb) {
+        cb(null, './uploads')
+    },
+    filename: function(req, file, cb) {
+        cb(null, Date.now() + file.originalname);
+    }
+});
+
+const fileFilter = (req, file, cb) => {
+    if (file.mimetype === 'image/jpeg' || file.mimetype === 'image/png' || file.mimetype === 'image/jpg') {
+        cb(null, true)
+    }
+    else {
+        cb(null, false)
+    }
+}
+
+const upload = multer({
+    storage: storage,
+    limits: {
+        fileSize: 1024 * 1024 * 5
+    },
+    fileFilter: fileFilter
+});
 
 router.post('/', (req, res) => {
   console.log('user signup');
@@ -58,6 +85,25 @@ router.get('/', (req, res, next) => {
   }
 })
 
+router.route('/:id')
+    .post(upload.single('imageData'), (req, res, next) => {
+        console.log(req.body)
+        db.Image.create({
+            imageName: req.body.imageName,
+            imageData: req.file.path
+        })
+        .then(function(dbImage) {
+            console.log(dbImage)
+            return User.findOneAndUpdate({ _id: req.params.id }, { $push: { images: dbImage._id }}, { new: true });
+        })
+        .then(function(data) {
+            res.json(data)
+        })
+        .catch(function(err) {
+            res.json(err)
+        })
+    })
+
 router.post('/logout', (req, res) => {
   if (req.user) {
       req.logout()
@@ -66,7 +112,5 @@ router.post('/logout', (req, res) => {
       res.send({ msg: 'no user to log out' })
   }
 })
-
-// router.route("/login").post(userController.findOne);
 
 module.exports = router;
