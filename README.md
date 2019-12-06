@@ -13,6 +13,8 @@ This website was created to give photographers a chance to upload their original
 - Body-Parser
 - MongoDB
 - Bootstrap
+- HTML
+- CSS
 
 ## Authors
 
