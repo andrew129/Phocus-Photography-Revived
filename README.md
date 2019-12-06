@@ -1,5 +1,7 @@
 # Phocus Photography
 
+## Preview
+
 ![Preview](https://github.com/andrew129/phocus-photography-revived/blob/master/client/src/images/phocus.png?raw=true)
 
 ## About
@@ -18,7 +20,7 @@ This website was created to give photographers a chance to upload their original
 - HTML
 - CSS
 
-## Authors
+## Author
 
 - Andrew Stiles
 
