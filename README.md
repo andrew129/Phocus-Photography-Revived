@@ -1,6 +1,6 @@
 # Phocus Photography
 
-![Preview](https://github.com/andrew129/phocus-photography-revived/blob/master/src/images/phocus.PNG?raw=true)
+![Preview](https://github.com/andrew129/phocus-photography-revived/blob/master/client/src/images/phocus.png?raw=true)
 
 ## About
 
