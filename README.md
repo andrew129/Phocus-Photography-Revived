@@ -11,6 +11,7 @@ This website was created to give photographers a chance to upload their original
 ## Technologies Used
 
 - NodeJS
+- Javascript
 - React
 - Multer(image uploads)
 - Express
